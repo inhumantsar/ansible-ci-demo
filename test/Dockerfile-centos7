@@ -1,10 +1,10 @@
-FROM williamyeh/ansible:centos7-onbuild
+FROM williamyeh/ansible:centos7
 MAINTAINER Shaun Martin <shaun@samsite.ca>
 
-ENV PLAYBOOK test.yml
+ENV PLAYBOOK test/test.yml
 ENV INVENTORY inventory
 
-RUN ansible-playbook-wrapper -vvv
+COPY test/ansible-playbook-wrapper /usr/local/bin/
 
 VOLUME /results
 ENV RESULTS_FILE /results/centos7
