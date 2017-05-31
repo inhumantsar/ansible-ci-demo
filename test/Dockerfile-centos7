@@ -1,0 +1,13 @@
+FROM williamyeh/ansible:centos7-onbuild
+MAINTAINER Shaun Martin <shaun@samsite.ca>
+
+ENV PLAYBOOK test.yml
+ENV INVENTORY inventory
+
+RUN ansible-playbook-wrapper -vvv
+
+VOLUME /results
+ENV RESULTS_FILE /results/centos7
+COPY test/checks.sh /usr/local/bin/
+
+CMD ["checks.sh"]
