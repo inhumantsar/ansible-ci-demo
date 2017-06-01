@@ -1,13 +1,17 @@
 FROM williamyeh/ansible:centos7
 MAINTAINER Shaun Martin <shaun@samsite.ca>
 
-ENV PLAYBOOK test/test.yml
+VOLUME /data
+VOLUME /results
+
+ENV RESULTS_FILE /results/centos7
+ENV PLAYBOOK /data/test/test.yml
 ENV INVENTORY inventory
+
+COPY . /data/
 
 COPY test/ansible-playbook-wrapper /usr/local/bin/
 
-VOLUME /results
-ENV RESULTS_FILE /results/centos7
 COPY test/checks.sh /usr/local/bin/
 
 CMD ["checks.sh"]
