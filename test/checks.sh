@@ -1,1 +1,2 @@
-echo "ran the dummy checks..." > $RESULT
+#!/bin/bash
+echo "ran the dummy checks..." > $RESULTS_FILE

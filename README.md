@@ -11,14 +11,14 @@ To illustrate, and maybe provide a simple template for, easy Docker-based Ansibl
 
 ## How?
 
+### Running it
+
     make clean && make test
 
-## Directory structure
+### Under the Hood
 
-Everything came straight out of `ansible-galaxy init` except for the following:
-
-* `Makefile` - Does the thing
-* `test/checks.sh` - Is injected into the Docker container and runs checks to ensure the desired functional state is present.
-* `test/Dockerfile-centos7` - Is used to build a CentOS 7 docker image for testing.
-* `ansible-playbook-wrapper` - This was grabbed from William Yeh's onbuild variant of the Ansible Docker images. The onbuild wasn't working for me and tbh, this seems less blackbox magical.
-* This `README.md`
+* `test/Dockerfile-centos7` - Defines the Docker image we'll be building for the tests.
+* `Makefile` - `make test` fires a `docker build` process, which starts with a base image in our target OS and Ansible pre-installed, then runs the fresh built image with the role files in there.
+* `test/checks.sh` - Check scripting goes here. It'll be run within the Docker container. Results are written to `$RESULTS_FILE`. By default this is a file called "centos7" on the /results volume that `make test` mounts as part of `docker run.`
+* `ansible-playbook-wrapper` - Simple wrapper for Ansible grabbed from William Yeh's code. It uses the PLAYBOOK env var we expose/set in the Dockerfile to run the tests.
+* `test.yml` - This simple playbook does an `include` on all the role files for testing.

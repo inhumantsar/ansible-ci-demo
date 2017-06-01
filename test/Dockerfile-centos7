@@ -5,13 +5,13 @@ VOLUME /data
 VOLUME /results
 
 ENV RESULTS_FILE /results/centos7
-ENV PLAYBOOK /data/test/test.yml
-ENV INVENTORY inventory
+ENV PLAYBOOK /data/test.yml
 
 COPY . /data/
 
 COPY test/ansible-playbook-wrapper /usr/local/bin/
+RUN ansible-playbook-wrapper -vvv
 
 COPY test/checks.sh /usr/local/bin/
 
-CMD ["checks.sh"]
+CMD ["/usr/local/bin/checks.sh"]
