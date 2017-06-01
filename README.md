@@ -1,4 +1,4 @@
-# ansible-dummy-role
+# ansible-ci-demo
 
 ## What?
 
