@@ -1,0 +1,6 @@
+
+test_centos7:
+  image: williamyeh/ansible:centos7
+  script:
+    - yum -y install git && ansible-galaxy install -r requirements.yml
+    - ansible-playbook test.yml --connection=local -vvv

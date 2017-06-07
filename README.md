@@ -22,3 +22,7 @@ To illustrate, and maybe provide a simple template for, easy Docker-based Ansibl
 * `test/checks.sh` - Check scripting goes here. It'll be run within the Docker container. Results are written to `$RESULTS_FILE`. By default this is a file called "centos7" on the /results volume that `make test` mounts as part of `docker run.`
 * `ansible-playbook-wrapper` - Simple wrapper for Ansible grabbed from William Yeh's code. It uses the PLAYBOOK env var we expose/set in the Dockerfile to run the tests.
 * `test.yml` - This simple playbook does an `include` on all the role files for testing.
+
+## Enabling CI for a GitLab Group
+1. Go to https://gitlab.somedomain.xyz/groups/yourgroup/edit
+2.
